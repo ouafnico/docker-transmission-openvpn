@@ -3,7 +3,7 @@
 # Version 1.10
 
 FROM ubuntu:14.04
-MAINTAINER Kristian Haugene
+MAINTAINER Kristian Haugene, Nicolas Repentin
 
 VOLUME /data
 VOLUME /config
@@ -14,7 +14,7 @@ RUN apt-get update \
     && add-apt-repository multiverse \
     && add-apt-repository ppa:transmissionbt/ppa \
     && apt-get update \
-    && apt-get install -y transmission-cli transmission-common transmission-daemon \
+    && apt-get install -y transmission-cli transmission-common transmission-daemon squid \
     && apt-get install -y openvpn curl rar unrar zip unzip \
     && curl -sLO https://github.com/Yelp/dumb-init/releases/download/v1.0.1/dumb-init_1.0.1_amd64.deb \
     && dpkg -i dumb-init_*.deb \
@@ -25,6 +25,7 @@ RUN apt-get update \
 # Add configuration and scripts
 ADD openvpn/ /etc/openvpn/
 ADD transmission/ /etc/transmission/
+ADD squid3/ /etc/squid3/
 
 ENV OPENVPN_USERNAME=**None** \
     OPENVPN_PASSWORD=**None** \
@@ -104,4 +105,5 @@ ENV OPENVPN_USERNAME=**None** \
 
 # Expose port and run
 EXPOSE 9091
+EXPOSE 3128
 CMD ["dumb-init", "/etc/openvpn/start.sh"]

@@ -54,4 +54,6 @@ if [ -n "${LOCAL_NETWORK-}" ]; then
   fi
 fi
 
+/usr/sbin/squid3 -f /etc/squid3/squid.conf &
+
 exec openvpn $TRANSMISSION_CONTROL_OPTS $OPENVPN_OPTS --config "$OPENVPN_CONFIG"
