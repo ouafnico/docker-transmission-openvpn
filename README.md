@@ -22,6 +22,8 @@ It bundles certificates and configurations for the following VPN providers:
 
 When using PIA as provider it will update Transmission hourly with assigned open port. Please read the instructions below.
 
+A squid proxy is running on 3128 port (through VPN). 
+
 ## Run container from Docker registry
 The container is available from the Docker registry and this is the simplest way to get it.
 To run the container use this command:
